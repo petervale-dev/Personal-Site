@@ -19,6 +19,6 @@ Use Node.js 22.12 or newer. Run `pnpm install`, then `pnpm dev`. Run `pnpm build
 
 ## Publish when ready
 
-The repository includes `.github/workflows/deploy.yml`, which builds and deploys the site to GitHub Pages when run manually. In GitHub repository settings, choose **Pages → Build and deployment → GitHub Actions** as the source. The site is configured for `https://petervale-dev.github.io/Personal-Site/`.
+The repository includes `.github/workflows/deploy.yml`, which builds and deploys the site to GitHub Pages when run manually. In GitHub repository settings, choose **Pages → Build and deployment → GitHub Actions** as the source. The site is configured for `https://petervale.dev/`.
 
-When connecting a custom domain, add `public/CNAME` with the domain, change `site` in `astro.config.mjs` to its full URL, and remove the `base` setting. Then update your DNS at the domain provider and set the custom domain in GitHub Pages.
+The custom domain is set to `petervale.dev` in GitHub Pages. Namecheap has four A records for `@` pointing to GitHub Pages (`185.199.108.153` through `185.199.111.153`) and a CNAME for `www` pointing to `petervale-dev.github.io`. GitHub redirects `www.petervale.dev` to the primary domain. The GitHub Actions deployment does not use a `public/CNAME` file.
