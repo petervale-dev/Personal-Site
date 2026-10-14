@@ -6,7 +6,9 @@ const schema = z.object({
   description: z.string(),
   date: z.coerce.date(),
   draft: z.boolean().default(false),
-  externalUrl: z.string().url().optional(),
+  externalUrl: z.string().url().refine((url) => new URL(url).protocol === 'https:', {
+    message: 'Use an HTTPS URL for external links.',
+  }).optional(),
 });
 
 export const collections = {

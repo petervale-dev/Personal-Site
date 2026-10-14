@@ -2,6 +2,8 @@
 
 An Astro site based on the **Personal Site — Visual Demo** on Page 1 in Paper. The portrait and signature are exported from that design. The interactive AFC II necklace comes from the supplied `necklace-animation` folder.
 
+This repository is public and currently has no license. Reusing the code or visual assets requires permission.
+
 ## Edit the site
 
 - The home page is in `src/pages/index.astro`.
@@ -13,7 +15,7 @@ An Astro site based on the **Personal Site — Visual Demo** on Page 1 in Paper.
 
 ## Work locally
 
-Use Node.js 20 or newer. Run `pnpm install`, then `pnpm dev`. Run `pnpm build` before publishing.
+Use Node.js 22.12 or newer. Run `pnpm install`, then `pnpm dev`. Run `pnpm build` before publishing.
 
 ## Publish when ready
 

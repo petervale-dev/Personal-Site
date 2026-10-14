@@ -122,8 +122,6 @@
   }
   const restLengths=ring.map((p,i)=>Math.hypot(ring[(i+1)%count].x-p.x,ring[(i+1)%count].y-p.y));
   const homeLengths=restLengths.slice();
-  try{localStorage.removeItem('peter-vale-necklace-shape-v2');}catch{}
-
   gl.enable(gl.DEPTH_TEST);gl.enable(gl.CULL_FACE);
   let width=0,height=0,projection=identity(),camera=identity(),distance=20.5;
   let asciiColumns=0,asciiRows=0,asciiPixels=null,asciiFont=0,lastAscii=-Infinity;
