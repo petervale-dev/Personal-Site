@@ -1,0 +1,50 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  const names = ['projects', 'texts', 'blog'] as const;
+  const collections = await Promise.all(names.map(async (name) => ({ name, entries: await getCollection(name, ({ data }) => !data.draft) })));
+  return collections.flatMap(({ name, entries }) => entries.map((entry) => ({
+    params: { collection: name, slug: entry.id },
+    props: { collection: name, entry },
+  })));
+}
+
+const { entry, collection } = Astro.props;
+const { Content } = await render(entry);
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+const sectionLabel = collection === 'projects' ? 'PROJECT' : collection === 'blog' ? 'BLOG' : 'TEXT';
+---
+<BaseLayout title={`${entry.data.title} — Peter Vale`} description={entry.data.description}>
+  <main class="article-page">
+    <nav><a href={base}>← PETER VALE</a></nav>
+    <article>
+      <div class="meta"><span>{sectionLabel}</span><time datetime={entry.data.date.toISOString()}>{entry.data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' })}</time></div>
+      <h1>{entry.data.title}</h1>
+      <p class="description">{entry.data.description}</p>
+      <div class="prose"><Content /></div>
+    </article>
+    <footer><a href={base}>← BACK TO HOME</a></footer>
+  </main>
+</BaseLayout>
+
+<style>
+  .article-page { width: min(100% - 44px, 760px); margin: 0 auto; padding: 42px 0 90px; }
+  nav { border-bottom: 1px solid #dce2ee; padding-bottom: 20px; font-size: 13px; }
+  a { text-decoration: none; }
+  a:hover { text-decoration: underline; text-underline-offset: 4px; }
+  article { padding-top: clamp(65px, 11vw, 130px); }
+  .meta { display: flex; justify-content: space-between; gap: 20px; font-size: 11px; letter-spacing: .04em; }
+  h1 { font-size: clamp(36px, 7vw, 72px); line-height: 1.06; font-weight: 400; letter-spacing: -.035em; margin: 24px 0; }
+  .description { font-size: clamp(15px, 2vw, 19px); line-height: 1.55; margin: 0 0 72px; }
+  .prose { color: #334976; font-size: 16px; line-height: 1.85; }
+  .prose :global(p) { margin: 0 0 1.35em; }
+  .prose :global(h2) { font-size: 25px; font-weight: 400; margin: 2.5em 0 .8em; }
+  .prose :global(h3) { font-size: 20px; font-weight: 400; margin: 2em 0 .8em; }
+  .prose :global(a) { text-decoration: underline; text-underline-offset: 3px; }
+  .prose :global(img) { max-width: 100%; height: auto; }
+  .prose :global(pre) { overflow: auto; padding: 16px; background: #f1f3f8; font-size: 13px; }
+  .prose :global(blockquote) { margin: 2em 0; padding-left: 1.2em; border-left: 2px solid #435b98; }
+  footer { margin-top: 120px; border-top: 1px solid #dce2ee; padding-top: 22px; font-size: 12px; }
+</style>

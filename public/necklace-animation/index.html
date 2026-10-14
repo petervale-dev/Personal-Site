@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#ffffff">
+  <title>Chrome necklace study</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="stage">
+    <a class="view-switch" href="ascii.html">ASCII VERSION <span aria-hidden="true">↗</span></a>
+    <div class="canvas-wrap" id="canvas-wrap">
+      <canvas id="scene" aria-label="Interactive 3D chrome chain and detailed cross pendant"></canvas>
+      <div class="fallback" id="fallback" hidden>Your browser could not start the 3D view. Please try a browser with WebGL 2.</div>
+    </div>
+    <p class="hint">MOVE TO EXPLORE <span aria-hidden="true">↗</span><br>DRAG CHAIN · RELEASE TO LET IT RETURN<br>DRAG SPACE TO TURN · SCROLL TO INSPECT</p>
+    <button class="reset" id="reset" type="button" aria-label="Reset the necklace view">RESET VIEW <span aria-hidden="true">↺</span></button>
+  </main>
+  <script src="scene.js" defer></script>
+</body>
+</html>

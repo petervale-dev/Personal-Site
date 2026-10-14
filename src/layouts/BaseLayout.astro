@@ -1,0 +1,29 @@
+---
+interface Props { title: string; description: string }
+const { title, description } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#ffffff" />
+    <meta name="description" content={description} />
+    <link rel="icon" href={`${base}favicon.svg`} type="image/svg+xml" />
+    <title>{title}</title>
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>
+
+<style is:global>
+  :root { color-scheme: light; font-family: Menlo, Monaco, Consolas, "Liberation Mono", monospace; color: #435b98; background: #fff; font-synthesis: none; }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; min-width: 320px; }
+  a { color: inherit; }
+  a:focus-visible, button:focus-visible { outline: 2px solid #435b98; outline-offset: 4px; }
+  ::selection { background: #dbe2f2; color: #2c417d; }
+</style>
